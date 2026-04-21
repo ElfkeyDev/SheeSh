@@ -9,4 +9,5 @@ no copyright for this bullshit ©x.
 If u r a linux user, im sorry king :D
 
 real engineers never look at this.
+
 High cortisol alerts ⚠️
