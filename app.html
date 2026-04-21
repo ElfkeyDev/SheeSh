@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SPSS</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="layout">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <h2>SPSS</h2>
+        <a href="app.html">Dashboard</a>
+        <a href="report.html">Report</a>
+        <a href="index.html">Exit</a>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+
+        <!-- HEADER -->
+        <div class="header">
+            <h1>Statistical Dashboard</h1>
+        </div>
+
+        <!-- CHART (LEFT BIG) -->
+      <div class="card chart-card">
+    <h3>Histogram</h3>
+
+    <div id="chartPlaceholder" class="placeholder">
+        
+    </div>
+
+    <canvas id="chart" style="display:none;"></canvas>
+</div>
+
+        <!-- INPUT -->
+        <div class="card input-card">
+            <h3>Data Input</h3>
+
+            <div class="input-group">
+                <label>Domain</label>
+                <select id="domain">
+                    <option value="engineering">Engineering</option>
+                    <option value="medicine">Medicine</option>
+                </select>
+            </div>
+
+         <div class="input-group">
+    <label>Upload CSV</label>
+
+    <div class="file-upload">
+        <label for="fileInput" class="custom-file-btn">
+            📂 Choose File
+        </label>
+
+        <span id="fileName">No file chosen</span>
+
+        <input type="file" id="fileInput" hidden>
+    </div>
+</div>
+
+            <div class="input-actions">
+                <button onclick="uploadFile()">Analyze</button>
+                <button onclick="showManualInput()">Manual</button>
+            </div>
+        </div>
+
+        <!-- STATS -->
+        <div class="card stats-card">
+            <h3>Statistics</h3>
+            <div id="statsGrid" class="grid"></div>
+        </div>
+
+        <!-- INSIGHT -->
+        <div class="card insight-card">
+            <h3>Insight</h3>
+            <p id="interpretationText"></p>
+        </div>
+
+        <!-- LOADING -->
+        <div id="loading" class="loading">
+            <div class="loader"></div>
+            <p>Analyzing...</p>
+        </div>
+
+    </div>
+</div>
+
+<!-- MODAL -->
+<div id="manualModal" class="modal">
+    <div class="modal-content">
+        <h2>Manual Data Entry</h2>
+
+        <table id="manualTable">
+            <thead>
+                <tr>
+                    <th>Value</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+
+        <div class="modal-buttons">
+            <button onclick="addRow()">Add Row</button>
+            <button onclick="analyzeManualData()">Analyze</button>
+            <button onclick="closeModal()">Close</button>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

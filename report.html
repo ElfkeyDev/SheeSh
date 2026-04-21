@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SPSS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="report-container">
+
+    <h1>Statistical Analysis Report</h1>
+
+    <!-- ================= STATS ================= -->
+    <div class="report-grid">
+        <div class="report-card"><h4>Mean</h4><p id="rMean">--</p></div>
+        <div class="report-card"><h4>Median</h4><p id="rMedian">--</p></div>
+        <div class="report-card"><h4>Mode</h4><p id="rMode">--</p></div>
+        <div class="report-card"><h4>Max</h4><p id="rMax">--</p></div>
+        <div class="report-card"><h4>Min</h4><p id="rMin">--</p></div>
+        <div class="report-card"><h4>Std Dev</h4><p id="rStd">--</p></div>
+        <div class="report-card"><h4>Variance</h4><p id="rVariance">--</p></div>
+        <div class="report-card"><h4>Count</h4><p id="rCount">--</p></div>
+        <div class="report-card"><h4>Outliers</h4><p id="rOutliers">--</p></div>
+    </div>
+
+    <!-- ================= INSIGHT ================= -->
+    <div class="report-insight">
+        <h3>Insight</h3>
+        <p id="rInsight">--</p>
+    </div>
+
+    <!-- ================= ACTIONS ================= -->
+    <div class="report-actions">
+        <button onclick="window.print()">Print Report</button>
+        <a href="app.html"><button>Back</button></a>
+    </div>
+
+</div>
+
+<script>
+    window.onload = () => {
+    localStorage.removeItem("reportData");
+};
+let data = localStorage.getItem("reportData");
+
+if (data && data !== "undefined") {
+
+    let stats = JSON.parse(data);
+
+    document.getElementById("rMean").innerText = stats.mean.toFixed(2);
+    document.getElementById("rMedian").innerText = stats.median.toFixed(2);
+    document.getElementById("rMode").innerText = stats.mode;
+    document.getElementById("rMax").innerText = stats.max;
+    document.getElementById("rMin").innerText = stats.min;
+    document.getElementById("rStd").innerText = stats.std.toFixed(2);
+    document.getElementById("rVariance").innerText = stats.variance.toFixed(2);
+    document.getElementById("rCount").innerText = stats.count;
+
+    document.getElementById("rOutliers").innerText =
+        stats.outliers && stats.outliers.length > 0
+            ? stats.outliers.join(", ")
+            : "None";
+
+    let insight = "";
+
+    if (stats.mean > 120) {
+        insight = "Average values are high which may indicate risk.";
+    } else if (stats.mean < 90) {
+        insight = "Values are below normal range.";
+    } else {
+        insight = "Values are within normal range.";
+    }
+
+    if (stats.std > 20) {
+        insight += " High variation detected.";
+    }
+
+    if (stats.outliers && stats.outliers.length > 0) {
+        insight += " Outliers detected: " + stats.outliers.join(", ");
+    } else {
+        insight += " No significant outliers detected.";
+    }
+
+    document.getElementById("rInsight").innerText = insight;
+
+} else {
+
+
+    document.querySelector(".report-container").innerHTML = `
+        <div style="text-align:center; margin-top:100px;">
+            <h2 style="color:#888;">No analysis yet</h2>
+            <p style="color:#666;">Go to dashboard and analyze data first</p>
+        </div>
+    `;
+}
+</script>
+
+</body>
+</html>

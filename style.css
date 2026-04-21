@@ -1,0 +1,491 @@
+/* ==================== RESET ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ==================== BODY ==================== */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: radial-gradient(circle at top, #111, #0d0d0d);
+    color: #f5f5f5;
+}
+
+/* ==================== LAYOUT ==================== */
+.layout {
+    display: flex;
+    height: 100vh;
+}
+
+/* ==================== SIDEBAR ==================== */
+.sidebar {
+    width: 240px;
+    background: #0a0a0a;
+    padding: 30px 20px;
+    border-right: 1px solid #222;
+}
+
+.sidebar h2 {
+    color: #ff2e2e;
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 28px;
+}
+
+.sidebar a {
+    display: block;
+    color: #bbb;
+    text-decoration: none;
+    padding: 14px;
+    margin: 10px 0;
+    border-radius: 8px;
+    transition: 0.25s;
+}
+
+.sidebar a:hover {
+    background: #ff2e2e;
+    color: white;
+    box-shadow: 0 0 15px rgba(255, 46, 46, 0.5);
+    transform: translateX(6px);
+}
+
+/* ==================== MAIN GRID ==================== */
+.main {
+    flex: 1;
+    padding: 30px;
+
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: auto 1fr auto auto;
+    gap: 20px;
+}
+
+/* ==================== HEADER ==================== */
+.header {
+    grid-column: span 2;
+}
+
+h1 {
+    color: #ff2e2e;
+    font-size: 32px;
+}
+
+h3 {
+    color: #ff2e2e;
+    margin-bottom: 10px;
+}
+
+/* ==================== CARD ==================== */
+.card {
+    background: linear-gradient(145deg, #111, #0a0a0a);
+    border: 1px solid #222;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    animation: fadeIn 0.5s ease;
+}
+
+/* ==================== INPUT ==================== */
+.input-card {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    color: #aaa;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.input-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* ==================== STATS ==================== */
+.stats-card {
+    grid-column: 2;
+    grid-row: 3;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+/* ==================== STAT BOX ==================== */
+.box {
+    background: #0f0f0f;
+    border: 1px solid #222;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.box:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 0 20px rgba(255, 46, 46, 0.5);
+}
+
+.box h4 {
+    color: #aaa;
+    font-size: 13px;
+}
+
+.box p {
+    font-size: 22px;
+    font-weight: bold;
+    color: #ff2e2e;
+}
+
+/* ==================== CHART ==================== */
+canvas {
+    grid-column: 1;
+    grid-row: 2 / span 2;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    background: #111;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+/* ==================== INSIGHT ==================== */
+#interpretationBox {
+    grid-column: span 2;
+    grid-row: 4;
+    border-left: 5px solid #ff2e2e;
+}
+
+/* ==================== INPUTS ==================== */
+select,
+input[type="file"] {
+    background: #111;
+    color: white;
+    border: 1px solid #333;
+    padding: 8px 10px;
+    border-radius: 6px;
+    margin-top: 8px;
+}
+
+/* ==================== BUTTON ==================== */
+button {
+    padding: 12px 18px;
+    background: #ff2e2e;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 0 10px rgba(255, 46, 46, 0.4);
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #cc0000;
+    transform: scale(1.05);
+}
+
+/* ==================== MODAL ==================== */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #1a1a1a;
+    width: 75%;
+    max-width: 850px;
+    margin: 60px auto;
+    padding: 25px;
+    border-radius: 12px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+/* ==================== TABLE ==================== */
+#manualTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+#manualTable th,
+#manualTable td {
+    padding: 12px;
+    border: 1px solid #333;
+    text-align: center;
+}
+
+#manualTable input {
+    width: 100%;
+    padding: 8px;
+    background: #111;
+    border: 1px solid #555;
+    color: white;
+    border-radius: 6px;
+}
+
+/* ==================== LOADING ==================== */
+.loader {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #333;
+    border-top: 4px solid #ff2e2e;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: auto;
+}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==================== REPORT ==================== */
+.report-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 40px;
+}
+
+.report-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.report-header h1 {
+    color: #ff2e2e;
+}
+
+.report-sub {
+    color: #aaa;
+    font-size: 14px;
+}
+
+.report-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
+}
+
+.report-card {
+    background: #111;
+    border: 1px solid #333;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.report-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px rgba(255, 46, 46, 0.3);
+}
+
+.report-card h4 {
+    color: #aaa;
+}
+
+.report-card p {
+    color: #ff2e2e;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.report-insight {
+    margin-top: 30px;
+    padding: 20px;
+    background: #111;
+    border-left: 5px solid #ff2e2e;
+    border-radius: 10px;
+}
+
+.report-footer {
+    margin-top: 20px;
+    text-align: right;
+    color: #888;
+}
+
+.report-actions {
+    margin-top: 30px;
+    text-align: center;
+}
+
+/* HEADER SUBTITLE */
+.sub {
+    color: #aaa;
+    font-size: 14px;
+}
+
+/* CHART CARD */
+.chart-card {
+    grid-column: 1;
+    grid-row: 2 / span 2;
+}
+
+/* INSIGHT */
+.insight-card {
+    grid-column: span 2;
+}
+
+/* LOADING */
+.loading {
+    grid-column: span 2;
+    text-align: center;
+    display: none;
+}
+
+/* GLASS EFFECT 🔥 */
+.card {
+    backdrop-filter: blur(6px);
+}
+
+/* SMOOTH SCROLL */
+html {
+    scroll-behavior: smooth;
+}
+
+/* BUTTON PRESS EFFECT */
+button:active {
+    transform: scale(0.95);
+}
+
+/* INPUT HOVER */
+select:hover,
+input:hover {
+    border-color: #ff2e2e;
+}
+
+/* LANDING PAGE */
+.landing {
+    text-align: center;
+    margin-top: 120px;
+}
+
+/* TITLE */
+.landing h1 {
+    font-size: 56px;
+    color: #ff2e2e;
+    margin-bottom: 10px;
+}
+
+/* SUBTITLE */
+.subtitle {
+    color: #aaa;
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+/* FEATURES */
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.feature {
+    background: #111;
+    padding: 15px 20px;
+    border-radius: 10px;
+    border: 1px solid #222;
+    color: #ccc;
+    transition: 0.3s;
+}
+
+.feature:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px rgba(255, 46, 46, 0.4);
+    color: white;
+}
+
+/* BUTTON */
+.start-btn {
+    padding: 14px 30px;
+    font-size: 16px;
+    background: #ff2e2e;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(255, 46, 46, 0.5);
+}
+
+.start-btn:hover {
+    transform: scale(1.05);
+}
+
+/* FOOTER */
+.footer {
+    margin-top: 40px;
+    color: #aaa;
+    font-size: 13px;
+}
+
+.file-upload {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* نفس ستايل الزرار بالظبط */
+/* نفس ستايل لكل الأزرار */
+/* كل الأزرار نفس الستايل */
+button,
+.file-upload .custom-file-btn {
+    padding: 12px 18px;
+    background: #ff2e2e;
+    color: white !important;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+
+    box-shadow: 0 0 10px rgba(255, 46, 46, 0.4);
+    transition: 0.2s;
+}
+
+/* hover */
+button:hover,
+.custom-file-btn:hover {
+    background: #cc0000;
+    transform: scale(1.05);
+}
+
+/* click */
+button:active,
+.custom-file-btn:active {
+    transform: scale(0.95);
+}
+
+.file-upload.active #fileName {
+    color: #00cc66;
+    font-weight: bold;
+}
+
+#fileName {
+    color: #bbb; /* بدل الرمادي الضعيف */
+    font-size: 13px;
+    margin-left: 5px;
+}
